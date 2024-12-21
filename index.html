@@ -316,36 +316,46 @@
             <div class="right"></div>
             <div class="bottom"></div>
 
-            <div class="other" id="bow">🎀</div>
-            <div class="other" id="gift">😀</div>
+            <div class="other" id="bow">🎄</div>
+        <div class="other" id="gift">🎁</div>
         </div>
     </div>
     <script>
-        function changeGift() {
+        // Biến toàn cục để theo dõi món quà hiện tại
+let currentGiftIndex = 1;
+
+function changeGift() {
     const giftDiv = document.getElementById("gift");
     const gifts = {
-        1: { emoji: "🦜", text: "A Partridge in a Pear Tree" },
-        2: { emoji: "🕊️", text: "2 Turtle Doves" },
-        3: { emoji: "🐔", text: "3 French Hens" },
-        4: { emoji: "🐦", text: "4 Calling Birds" },
-        5: { emoji: "💍", text: "5 Gold Rings" },
-        6: { emoji: "🥚", text: "6 Geese a-Laying" },
-        7: { emoji: "🦢", text: "7 Swans a-Swimming" },
-        8: { emoji: "🥛", text: "8 Maids a-Milking" },
-        9: { emoji: "💃", text: "9 Ladies Dancing" },
-        10: { emoji: "⛹️‍♂️", text: "10 Lords a-Leaping" },
-        11: { emoji: "🎷", text: "11 Pipers Piping" },
-        12: { emoji: "🥁", text: "12 Drummers Drumming" }
+        1: { emoji: "🎁", text: "A Partridge in a Pear Tree" },
+        2: { emoji: "🎈", text: "2 Turtle Doves" },
+        3: { emoji: "🎉", text: "3 French Hens" },
+        4: { emoji: "⭐", text: "4 Calling Birds" },
+        5: { emoji: "💝", text: "5 Gold Rings" },
+        6: { emoji: "🌟", text: "6 Geese a-Laying" },
+        7: { emoji: "💫", text: "7 Swans a-Swimming" },
+        8: { emoji: "✨", text: "8 Maids a-Milking" },
+        9: { emoji: "💖", text: "9 Ladies Dancing" },
+        10: { emoji: "🎊", text: "10 Lords a-Leaping" },
+        11: { emoji: "💕", text: "11 Pipers Piping" },
+        12: { emoji: "❤️", text: "12 Drummers Drumming" }
     };
 
-    const days = Object.keys(gifts);
-    const randomDay = days[Math.floor(Math.random() * days.length)];
-    const { emoji, text } = gifts[randomDay];
-
+    // Lấy món quà hiện tại
+    const { emoji, text } = gifts[currentGiftIndex];
+    
+    // Cập nhật hiển thị
     giftDiv.innerHTML = `<span>${emoji}<span> <p>${text}</p>`;
+    
+    // Tăng index cho lần tiếp theo
+    currentGiftIndex++;
+    
+    // Nếu đã hiển thị hết 12 món quà, quay lại từ đầu
+    if (currentGiftIndex > 12) {
+        currentGiftIndex = 1;
+    }
 }
 
-// Chỉ thêm event click để mở/đóng hộp quà
 document.getElementById("cube").addEventListener("click", function () {
     this.classList.toggle("active");
     if (!this.classList.contains("active")) {
@@ -353,7 +363,6 @@ document.getElementById("cube").addEventListener("click", function () {
     }
 });
 
-// Chỉ random món quà khi load trang, không tự động mở hộp
 document.addEventListener("DOMContentLoaded", function () {
     changeGift();
 });
